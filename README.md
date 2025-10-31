@@ -14,10 +14,14 @@ linux ki liye pahly aap virtual envirment bana ly
 
 <h2>Flask Instance </h2>
 aab file create kar k uss ka name likh ,   
- Flask class import kary
+ Flask class import kary  
+ 
 ```python
  from flask import Flask
-  ```
+```
+
+  
+  
   ***
 
 Flask class ka ik object ya instance banay 
