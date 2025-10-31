@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Web Page</h1>
+    </header>
+    <main>
+        <p>This is a sample web page created to {{name}}.</p>
+    </main>
+
+    <div>
+        <!-- Adding python experssion inside the html file  -->
+        {% for x in list %}
+       <h1>{{x}}</h1>
+        {% endfor %}
+    </div>
+    <footer>
+        <p>&copy; 2025 My Web Page</p>
+    </footer>
+</html>

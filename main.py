@@ -1,13 +1,13 @@
-from flask import Flask ,redirect ,url_for
+from flask import Flask ,redirect ,url_for,render_template
 
 app = Flask (__name__)
 
 isLogin=True
-
+list = [ "ali ",'khalil']
 # Define a route for the home page
 @app.route('/')
 def dashborad():
-    return "Administration Dashboard"
+    return render_template("index.html",list=list, title="Dashboard",name="ai_powered survillance")
 
 # Redirecting to Student Analytics Page
 @app.route('/student')
