@@ -67,6 +67,43 @@ def Student():
         return "Student Analytics Page"
 ```
 
+<h2> Dynamic Contents in HTML template </h2>
+ 
+ jis tag main aab ny dynamic content ko show karna hy wha aap {{ ___ }} varibale ka name likhy ,   
+
+```html
+ <main>
+   <p>This is a sample web page created to display you {{name}}.</p>
+    </main>
+   
+```
+   jo rendered_template k function main as argument pass kiya ho ,  
+   Yo iss traha aap apni zarort k mutabiq Contents display kar sakty hn  
+```python 
+    return render_template("index.html",list=list, title="Dashboard",name="Uzair")
+```
+
+<h2> Python Code Expression inside HTML </h2>
+
+Python ka code HTML main likhy ny k liye aap  
+ {% ___ %} k ander code likhy   
+
+
+```html
+ <div>
+        <!-- Adding python experssion inside the html file  -->
+        {% for x in list %}
+       <h1>{{x}}</h1>
+        {% endfor %}
+    </div>
+```
+
+
+
+
+
+
+
 
 
 ***
