@@ -35,6 +35,11 @@ def redirect_students(name):
 
 
 
+# inherents the Child template in base template
+@app.route("/base")
+def base():
+     return render_template("child.html")
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 

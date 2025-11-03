@@ -102,9 +102,61 @@ Python ka code HTML main likhy ny k liye aap
     </div>
 ```
 
+<h2> Template inheritance </h2>
 
+Template inheritance ik asa triqa hy jis main child template ,  
+ Base template main {% block name %} _____ {% endblock %} ki jagha render hota hy   
 
+```html base.html
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+</head>
+<body>
 
+     {% include "index.html" %}
+
+    <div id="content">
+        {% block content %}
+            <!-- Default content or empty -->
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+            &copy; Copyright 2025.
+        {% endblock %}
+    </div>
+</body>
+
+```
+
+Child Template main Sab sy phaly Base.html ko Extends krna hoga   
+phir iss mian Wo tamam {% block %} tags k center main  {% endblock %} Content ko likhy   
+
+```html child.html
+{% extends "base.html" %}
+
+{% block title %}
+    About Us - {{ super() }} 
+{% endblock %}
+
+{% block content %}
+    <h1>About Us</h1>
+    <p>This is the content for the about page.</p>
+{% endblock %}
+
+```
+
+render-template() main aap child.html ko call kary...   
+kuo k child.html extends howa hy base.html sy 
+
+```python 
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+```
 
 
 
