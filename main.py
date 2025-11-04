@@ -1,4 +1,4 @@
-from flask import Flask ,redirect ,url_for,render_template
+from flask import Flask ,redirect ,url_for,render_template,request,session
 
 app = Flask (__name__)
 
@@ -39,6 +39,44 @@ def redirect_students(name):
 @app.route("/base")
 def base():
      return render_template("child.html")
+
+
+# dictionary to store user and password
+users = {
+    'ali': '1234',
+    'pak': 'pak'
+}
+
+@app.route('/login')
+def Login():
+     return render_template("login.html")
+@app.route('/handle_get', methods=['GET'])
+def handle_get():
+    if request.method == 'GET':
+        username = request.args['username']
+        password = request.args['password']
+        print(username, password)
+        if username in users and users[username] == password:
+            return '<h1>Welcome!!!</h1>'
+        else:
+            return '<h1>invalid credentials!</h1>'
+    else:
+        return render_template('login.html')
+
+
+
+@app.route('/handle_post', methods=['POST'])
+def handle_post():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        print(username, password)
+        if username in users and users[username] == password:
+            return '<h1>Welcome!!!</h1>'
+        else:
+            return '<h1>invalid credentials!</h1>'
+    else:
+        return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
