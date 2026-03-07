@@ -3,11 +3,11 @@ from flask import Flask ,redirect ,url_for,render_template,request,session
 app = Flask (__name__)
 
 isLogin=True
-list = [ "ali ",'khalil']
+list = [ "ali ",'khalil','ar45']
 # Define a route for the home page
 @app.route('/')
 def dashborad():
-    return render_template("index.html",list=list, title="Dashboard",name="ai_powered survillance")
+    return render_template("index.html",list=list, title="Dashboard-for web ",name="ai_powered survillance")
 
 # Redirecting to Student Analytics Page
 @app.route('/student')
@@ -38,7 +38,11 @@ def redirect_students(name):
 # inherents the Child template in base template
 @app.route("/base")
 def base():
-     return render_template("child.html")
+     return render_template("base.html")
+
+@app.route("/child")
+def child():
+    return render_template("child.html")
 
 
 # dictionary to store user and password
