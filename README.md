@@ -291,3 +291,60 @@ Blueprint objects also provide other methods that you may find useful:
 - iss main ap apna module ka non-global static files ko bi rakh sathy hn   
 - iss trha ap ko sirf ik hi file main scroling nahi karni pary gi.  
 - balky only need to go to spcific module and chnage it    
+
+
+```python
+from flask import Blueprint, render_template
+from ecommerce.models import Product
+
+products_bp = Blueprint('products_bp', __name__,
+    template_folder='templates',
+    static_folder='static', static_url_path='assets')
+
+@products_bp.route('/')
+def list():
+    products = Product.query.all()
+    return render_template('products/list.html', products=products)
+
+@products_bp.route('/view/<int:product_id>')
+def view(product_id):
+    product = Product.query.get(product_id)
+    return render_template('products/view.html', product=product)
+
+```
+- This code defines the products_bp Flask Blueprint and contains only the code that’s related to product functionality.
+- Since this Flask Blueprint has its own templates, you need to specify the template_folder relative to the Blueprint’s root in the Blueprint object creation.   
+- Since you specify static_folder='static' and static_url_path='assets', files in ecommerce/products/static/ will be served under the /assets/ URL.
+
+
+</br>
+
+jis trha ye module ko alag alag bnya hy isstrha baqioyo ko bna k Register kary    
+
+```python 
+from flask import Flask
+
+from ecommmerce.api.api import api_bp
+from ecommmerce.auth.auth import auth_bp
+from ecommmerce.cart.cart import cart_bp
+from ecommmerce.general.general import general_bp
+from ecommmerce.products.products import products_bp
+
+app = Flask(__name__)
+
+app.register_blueprint(api_bp, url_prefix='/api')
+app.register_blueprint(auth_bp)
+app.register_blueprint(cart_bp, url_prefix='/cart')
+app.register_blueprint(general_bp)
+app.register_blueprint(products_bp, url_prefix='/products')
+
+```
+
+main Flask Application main Register kary 
+
+- iss main ham ny url_prefix='/api' , url_prefix='/products' use ki hn...   
+- taa k ham endpoint ki collison sy bachy rahy...   
+---
+- jesa k ham ny blurprint module main tempalate wlay folder main sub-folder bnaya    
+- tha taa k ye Root k Template folder k sath collision na kary ....   
+- iss liye ham ny /productu/tempalate/product taak module ki view ussi k template ko render kary   
