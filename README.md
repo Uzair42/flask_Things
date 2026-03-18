@@ -166,3 +166,128 @@ def index():
 
 
   
+# Blueprint in Flask
+
+Blueprint flask main ik code base layout ko manage karny ka triqa hy 
+jis main ham ik bary project ko choty choty sub blueprint main divide kar dety hn 
+oor bad main inko main flask application main **register** kar lety hy.
+
+  
+
+Blue print madad karty hn project ko choty choty module main splite kar dy 
+taa k in ko dubra kisi dosry project main istaml kar saky
+
+- API blueprint 
+- Authenticaiton Blueprint
+- Product Blueprint 
+
+
+```python
+from flask import Blueprint
+
+example_blueprint = Blueprint('example_blueprint', __name__)
+
+@example_blueprint.route('/')
+def index():
+    return "This is an example app"
+
+```
+
+khuch iss trha ham blueprint ko import karty hn 
+oor uss ka name , oor __name__ mention karty hn,,is k ilwa ham opitonal parameter bi 
+bata sakty hn ,,,   
+jin main **url_prefix** /api/v1   
+
+
+ham iss ko main flask application main register karna hota hy ..   
+taa k ye blueprint as module applicaiton ki functionality ko extend kardy  
+
+
+```python
+from flask import Flask
+from example_blueprint import example_blueprint
+
+app = Flask(__name__)
+app.register_blueprint(example_blueprint)
+```
+
+
+Blueprint ki pass .route ki ilwa bi funciton majood hoty hn  
+
+Blueprint objects also provide other methods that you may find useful:
+
+-  __.errorhandler()__ to register an error handler function
+- __.before_request()__ to execute an action before every request
+-  __.after_request()__ to execute an action after every request
+- __.app_template_filter()__ to register a template filter at the application level
+
+        Let Desgin layout for  Flask Blueprints:
+
+- __API Blueprint__ to enable external systems to search and retrieve product information
+- __Authentication Blueprint__ to enable users to log in and recover their password
+- __Cart Blueprint__ for cart and checkout functionality
+- __General Blueprint__ for the homepage
+- __Products Blueprint__ for searching and viewing products
+
+
+        here is layout
+
+        |ecommerce/
+        |
+        ├── api/
+        |   ├── __init__.py
+        |   └── api.py
+        |
+        ├── auth/
+        |   ├── templates/
+        |   |   └── auth/
+        |   |       ├── login.html
+        |   |       ├── forgot_password.html
+        |   |       └── signup.html
+        |   |
+        |   ├── __init__.py
+        |   └── auth.py
+        |
+        ├── cart/
+        |   ├── templates/
+        |   |   └── cart/
+        |   |       ├── checkout.html
+        |   |       └── view.html
+        |   |
+        |   ├── __init__.py
+        |   └── cart.py
+        |
+        ├── general/
+        |   ├── templates/
+        |   |   └── general/
+        |   |       └── index.html
+        |   |
+        |   ├── __init__.py
+        |   └── general.py
+        |
+        ├── products/
+        |   ├── static/
+        |   |   └── view.js
+        |   |
+        |   ├── templates/
+        |   |   └── products/
+        |   |       ├── list.html
+        |   |       └── view.html
+        |   |
+        |   ├── __init__.py
+        |   └── products.py
+        |
+        ├── static/
+        |   ├── logo.png
+        |   ├── main.css
+        |   └── generic.js
+        |
+        ├── app.py
+        ├── config.py
+        └── models.py
+
+
+- haar ik module apna template folder rakhta hy .. oor pana define ViewFunciton rakhta hy    
+- iss main ap apna module ka non-global static files ko bi rakh sathy hn   
+- iss trha ap ko sirf ik hi file main scroling nahi karni pary gi.  
+- balky only need to go to spcific module and chnage it    

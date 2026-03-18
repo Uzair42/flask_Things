@@ -37,12 +37,12 @@ on the backend side using 'name' field of form.-->
     <div>
         <h1>Handle POST Request</h1>
         <form method="POST"
-              action="{{ url_for('handle_post') }}">
+              action="{{ url_for('handle_post_login') }}">
             <input type="text"
-                   name="username"
+                   name="usernamePost"
                    placeholder="Username">
             <input type="password"
-                   name="password"
+                   name="passwordPost"
                    placeholder="Password">
             <button type="submit">submit</button>
         </form>

@@ -54,14 +54,17 @@ users = {
 @app.route('/login')
 def Login():
      return render_template("login.html")
+
+# there will be password showing in url 
 @app.route('/handle_get', methods=['GET'])
 def handle_get():
     if request.method == 'GET':
+        #critical way..as url show everything using get 
         username = request.args['username']
         password = request.args['password']
         print(username, password)
         if username in users and users[username] == password:
-            return '<h1>Welcome!!!</h1>'
+            return f'<h1>Welcome!!! {users.get(username,None)} happy mood on </h1>'
         else:
             return '<h1>invalid credentials!</h1>'
     else:
@@ -70,13 +73,13 @@ def handle_get():
 
 
 @app.route('/handle_post', methods=['POST'])
-def handle_post():
+def handle_post_login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form['usernamePost']
+        password = request.form['passwordPost']
         print(username, password)
         if username in users and users[username] == password:
-            return '<h1>Welcome!!!</h1>'
+            return f'<h1>Welcome!!! {username}</h1>'
         else:
             return '<h1>invalid credentials!</h1>'
     else:
